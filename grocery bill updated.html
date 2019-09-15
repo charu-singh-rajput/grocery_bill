@@ -1,0 +1,207 @@
+<html>
+	<head>
+		<style>
+			#parent_div_1, #parent_div_2
+				{
+				  width: 550px;
+				  height: 100px;
+				  border: 2px groove black;
+				  margin-right: 10px;
+				  text-align:center;
+				  float: left;
+				}
+			h5
+				{
+					color:black;
+				}
+			input,select
+			{
+				outline:none;
+			}
+		</style>
+		<script>
+			function add()
+				{
+					var na=document.getElementById("NAME");
+					var Characters=/^([a-zA-Z]+\s?)*$/;
+					var ph=document.getElementById("PHONE");
+					var Numbers=/^[0-9]+$/;
+					if((na.value.trim()=="")||(!na.value.match(Characters)))
+						{
+							document.getElementById("msg").innerHTML="<br> Please Enter Charcters only!";
+							na.value="";
+							na.focus();
+							return false;
+						}
+					if((ph.value.trim()=="")||(!ph.value.match(Numbers))||(ph.value.length < 10))
+						{
+							document.getElementById("msg1").innerHTML="<br> Please Enter the Field Properly!";
+							ph.value="";
+							ph.focus();
+							document.getElementById("msg").style.visibility='hidden';
+							return false;
+						}
+					
+					var index=document.getElementById("INDEX").value;
+					var type=document.getElementById("Type").value;
+					var quantity=document.getElementById("QUANTITY").value;
+					var rate=document.getElementById("RATE").value;
+					var amount=document.getElementById("AMOUNT").value;
+					
+			
+					if(type=="null")
+						{
+							document.getElementById("msg2").innerHTML="<br> Select any one of the option!";
+							document.getElementById("msg").style.visibility='hidden';
+							document.getElementById("msg1").style.visibility='hidden';
+							return false;
+						}
+					if((quantity.trim()=="")||(!quantity.match(Numbers)))
+						{
+							document.getElementById("msg3").innerHTML="<br> Please enter numbers only!";
+							quantity="";
+							document.getElementById("QUANTITY").focus();
+							document.getElementById("msg").style.visibility='hidden';
+							document.getElementById("msg2").style.visibility='hidden';
+							document.getElementById("msg1").style.visibility='hidden';
+							return false;
+						}
+					
+					var table = document.getElementById("myTable");
+					var row = table.insertRow(1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					cell1.innerHTML = index;
+					cell2.innerHTML = type;
+					cell3.innerHTML = quantity;
+					cell4.innerHTML = rate;
+					cell5.innerHTML = amount;
+					return false;
+				}
+					a = '';
+					a += Math.round(Math.random() * 10000);
+				window.onload = function () 
+					{
+						document.getElementById("BILL").value = a;
+						var da = new Date();
+						document.getElementById("DATE").value = Date();
+					}
+				function Random() 
+					{
+						return Math.floor(Math.random() * 1000);
+					} 
+				function rand()
+					{
+						return Math.floor(Math.random() * 100);
+					}
+				function amt()
+					{
+						document.getElementById("AMOUNT").value=(document.getElementById("QUANTITY").value * document.getElementById("RATE").value);
+					}
+		</script>
+	</head>
+		<body style="background-color:lightgreen">
+			<h1 style="color:maroon"><center><b><u>GROCERY BILL(ORIGINAL)</u></b></center></h1>
+		<div id='parent_div_1'>
+			<h5  ><b>ADDRESS: <br>No.1 Kendriya Vidyalaya School, Gandhi Nagar 1st St, near 2 & 3, Rajakilpakkam, Selaiyur, Chennai, Tamil Nadu 600073</h5>
+		</div>
+		<div id='parent_div_2'>
+			<h5 >Contact Number : 97453678465<br> website:www.grocerysell.com<br> gmail:grocery@gmail.com</h5>
+		</div>
+		<form name="web">
+			<table align="Left" cellspacing="5" cellpadding="5" id="t1">
+				<tr>
+					<td><b>Bill No</b></td>
+					<td><b>::</b></td>
+					<td><input type="text"  id="BILL" style="height:40px;width:430px;border:2px groove lightblue;border-radius:8px "></td>
+				</tr>
+				<tr>
+					<td><b>Date & Time</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text"  id="DATE" style="height:40px;width:430px;border:2px groove lightblue;border-radius:8px "></td>
+				</tr>
+			</table><br><br><br><br><br>
+			<table align="center" cellspacing="5" cellpadding="5">
+				<tr>
+					<td><b>Customer Name</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text"  autofocus  id="NAME" placeholder="Enter customer name here " autocomplete="off" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px ">
+					<span id="msg" style="color:red"></span></td>
+				</tr>
+				<tr>
+					<td><b>Phone Number</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text"  id="PHONE" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px " placeholder="Enter Phone number here" maxlength="10" autocomplete="off" >
+					<span id="msg1" style="color:red"></span></td>
+				</tr>
+			</table><br><br><br><br>
+			<table align="center" cellspacing="5" cellpadding="5" >
+				<tr>
+					<td><b>INDEX</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text" id="INDEX" placeholder="Index here" autocomplete="off" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px "></td>
+				</tr>
+				<tr>
+					<td><b>SELECT YOUR ITEM</b></td>
+					<td><b>	::	</b></td>
+					<td><select  id="Type" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px " align="center" onblur="document.getElementById('INDEX').value=Random()">
+						<option value="null">  --Select--    </option>
+						<option value="Tomato">Tomato</option>
+						<option value="Potato">Potato</option>
+						<option value="Apple">Apple</option>
+						<option value="Mango">Mango</option>
+						<option value="Banana">Banana</option>
+						<option value="Papaya">Papaya</option>
+						<option value="Custard Apple">Custard Apple</option>
+						<option value="Leafy Vegetable">Leafy Vegetable</option>
+						<option value="Corriander">Corriander</option>
+						<option value="Lemon">Lemon</option>
+					</select>
+					<span id="msg2" style="color:red"></span></td>
+				</tr>
+				<tr>
+					<td><b>	QUANTITY</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text" id="QUANTITY"  placeholder="Enter quantity here" autocomplete="off" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px " onblur="document.getElementById('RATE').value=rand()" >.kg
+					<span id="msg3" style="color:red"></span></td>
+				</tr>
+				<tr>
+					<td><b>	RATE</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text" id="RATE" placeholder="Rate here" autocomplete="off" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px "></td>
+				</tr>
+				<tr>
+					<td><b>	AMOUNT</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text" id="AMOUNT" placeholder="Amount here" autocomplete="off" style="padding:0px 130px;height:40px;width:430px;border:2px groove lightblue;border-radius:8px "  onclick="amt();"></td>
+				</tr>
+			</table>
+			<table align="center" cellspacing="10" cellpadding="10">
+				<tr>
+					<td><input type="Submit" value="ADD NEW ROW" onclick='return add();' style="height:50px;width:150px:position:relative;border:2px groove lightblue;border-radius:5px"></td>
+					<td><input type="Submit" value="Clear" onclick="document.getElementById('t1').value=clear();" style="height:50px;width:150px:position:relative;border:2px groove lightblue;border-radius:5px"></td>
+				</tr>
+			</table><br><br><br>
+			<table id="myTable" align="center" cellspacing="5" cellpadding="5" border="15">
+			  <tr>
+				<th>INDEX</th>
+				<th>ITEM</th>
+				<th>QUANTITY</th>
+				<th>RATE</th>
+				<th>AMOUNT</th>
+			  </tr>
+			</table>
+			<br><br><br>
+			<table align="right">
+				<tr>
+					<td><b>TOTAL</b></td>
+					<td><b>	::	</b></td>
+					<td><input type="text" name="total1" id="TOTAL" onclick="total();"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
